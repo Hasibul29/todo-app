@@ -1,14 +1,20 @@
-const todoInput = document.getElementById('todo-input');
-const todoSubmitButton = document.getElementById('todo-submit');
-const todoList = document.getElementById('todo-list');
+class TodoApp {
+    constructor() {
+        this.todoInput = document.getElementById('todo-input');
+        this.todoSubmitButton = document.getElementById('todo-submit');
+        this.todoList = document.getElementById('todo-list');
 
-todoSubmitButton.addEventListener('click', () => {
-  if(todoInput.value){
-    todoList.innerHTML +=  `<li>${todoInput.value}
-                              <button>Complete</button>
-                              <button>Remove</button>
-                              <button>Update</button>
-                            </li>`;
-    todoInput.value = null;
-  }
-});
+        this.todoSubmitButton.addEventListener('click', () => {
+            // console.log(this); // ??why this works here!
+            if(this.todoInput.value){
+                this.todoList.innerHTML +=  `<li>${this.todoInput.value}
+                                        <button>Complete</button>
+                                        <button>Edit</button>
+                                        <button>Remove</button>
+                                        </li>`;
+                this.todoInput.value = null;
+            }
+        });
+    }
+}
+let todo = new TodoApp();
