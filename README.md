@@ -12,3 +12,8 @@ works inside arrow function when the function is defined inside a constructor!
 
 # version 0.4
 In this version I have added functionality of the 'complete' button.
+
+# version 0.5
+In this version I have added functionality of the 'edit' button.But its full of bugs.
+I will fix this next in next. I also modified some of the things that is defined the 
+'getEverything' function outside the constructor.
