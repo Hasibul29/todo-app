@@ -23,3 +23,6 @@ In this version I have added 'remove' button functionality and fixed the 'edit' 
 
 # version 0.7
 In this version I have integrated Local storage and modified some of the stuff in 'getEverything' Function.
+
+# version 0.8
+In this version 'edit' button also disappear when todo is completed. Issue with the empty text when edited text is null fixed. The green color is back when todo is complete. The completed task will be sorted to lowerposition.

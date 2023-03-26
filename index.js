@@ -30,11 +30,14 @@ class TodoApp {
     getEverything(){
         this.todoList.innerHTML = null;
         // console.log(this.localTodo);
+        this.localTodo.sort((a,b)=> a.complete-b.complete);
+        // console.log(this.localTodo);
         this.localTodo.forEach(todo =>{
             const single =document.createElement('li');
+            if(todo.complete) single.style.backgroundColor = 'lightgreen';
             single.innerHTML = `${todo.text}
                                 ${!todo.complete?'<button class="complete">Completed</button>':''}
-                                <button class="edit">Edit</button>
+                                ${!todo.complete?'<button class="edit">Edit</button>':''}
                                 <button class="remove">Remove</button>`;
             const completeButton = single.querySelector('.complete');
             if(completeButton){
@@ -45,12 +48,16 @@ class TodoApp {
                 });
             }
             const editButton = single.querySelector('.edit');
-            editButton.addEventListener('click',()=>{
-                const newText = prompt('Enter new text:',todo.text);
-                todo.text = newText;
-                localStorage.setItem('localTodo',JSON.stringify(this.localTodo));
-                this.getEverything();
-            });
+            if(editButton){
+                editButton.addEventListener('click',()=>{
+                    const newText = prompt('Enter new text:',todo.text);
+                    if(newText){
+                        todo.text = newText;
+                        localStorage.setItem('localTodo',JSON.stringify(this.localTodo));
+                        this.getEverything();
+                    }
+                });
+            }
             const removeButton = single.querySelector('.remove');
             removeButton.addEventListener('click',()=>{
                 this.localTodo = this.localTodo.filter(rem => rem.id!=todo.id);
