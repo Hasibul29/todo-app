@@ -17,3 +17,6 @@ In this version I have added functionality of the 'complete' button.
 In this version I have added functionality of the 'edit' button.But its full of bugs.
 I will fix this next in next. I also modified some of the things that is defined the 
 'getEverything' function outside the constructor.
+
+# version 0.6
+In this version I have added 'remove' button functionality and fixed the 'edit' button issue.

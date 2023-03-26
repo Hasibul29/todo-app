@@ -10,7 +10,7 @@ class TodoApp {
                 this.todoList.innerHTML +=`<li>${this.todoInput.value}
                                                 <button class="complete">Completed</button>
                                                 <button class="edit">Edit</button>
-                                                <button>Remove</button>
+                                                <button class="remove">Remove</button>
                                             </li>`;
                 this.todoInput.value = null;
                 this.getEverything();
@@ -20,7 +20,6 @@ class TodoApp {
         this.getEverything();
     }
     getEverything(){
-        console.log("AMI EKhane");
         let completeButton = document.querySelectorAll('#todo-list .complete');
         completeButton.forEach(item =>{
             item.addEventListener('click',()=>{
@@ -29,7 +28,6 @@ class TodoApp {
                 parent.removeChild(item);
             });
         });
-        //there is a problem with edit event. need to be fixed
         let editButton = document.querySelectorAll('#todo-list .edit');
         editButton.forEach(item =>{
             item.addEventListener('click',()=>{
@@ -37,6 +35,14 @@ class TodoApp {
                 const newText = prompt('Enter new text:',name);
                 let regex = new RegExp(name);
                 item.parentElement.innerHTML = item.parentElement.innerHTML.replace(regex,newText);
+                this.getEverything();
+            });
+        });
+        let removeButton = document.querySelectorAll('#todo-list .remove');
+        removeButton.forEach(item =>{
+            item.addEventListener('click',()=>{
+               item.parentElement.remove();
+                this.getEverything(); 
             });
         });
     }
