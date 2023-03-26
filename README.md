@@ -20,3 +20,6 @@ I will fix this next in next. I also modified some of the things that is defined
 
 # version 0.6
 In this version I have added 'remove' button functionality and fixed the 'edit' button issue.
+
+# version 0.7
+In this version I have integrated Local storage and modified some of the stuff in 'getEverything' Function.
