@@ -7,8 +7,7 @@ In this version I have added simple JavaScript.I will update it to
 OOP in next version.
 
 # version 0.3
-In this version I have converted the script to OOP. But I am confused why 'this' 
-works inside arrow function when the function is defined inside a constructor!
+In this version I have converted the script to OOP.
 
 # version 0.4
 In this version I have added functionality of the 'complete' button.
@@ -26,3 +25,6 @@ In this version I have integrated Local storage and modified some of the stuff i
 
 # version 0.8
 In this version 'edit' button also disappear when todo is completed. Issue with the empty text when edited text is null fixed. The green color is back when todo is complete. The completed task will be sorted to lowerposition.
+
+# version 0.9
+Final version!!!
