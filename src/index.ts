@@ -1,0 +1,88 @@
+class Todo {
+    public readonly id:number;
+    public text:string;
+    public complete:boolean;
+
+    constructor(text:string) {
+        this.id = Date.now();
+        this.text = text;
+        this.complete = false;
+    }
+}
+
+class TodoApp {
+    public todoInput:HTMLInputElement;
+    public todoSubmitButton:HTMLButtonElement;
+    public todoList:HTMLUListElement;
+    public localTodo:Todo[];
+    
+    constructor() {
+        this.todoInput = document.getElementById('todo-input') as HTMLInputElement;
+        this.todoSubmitButton = document.getElementById('todo-submit') as HTMLButtonElement;
+        this.todoList = document.getElementById('todo-list') as HTMLUListElement;
+        this.localTodo = JSON.parse(localStorage.getItem('localTodo') as string) || [];
+
+        if(this.todoSubmitButton){
+            this.todoSubmitButton.addEventListener('click', () => {
+                if (this.todoInput) {
+                    if(this.todoInput.value) {
+                        this.addTodo();
+                    }
+                }
+            });
+        }
+        this.getEverything();
+    }
+    addTodo():void {
+        const singleTodo = new Todo(this.todoInput.value);
+        this.localTodo.push(singleTodo);
+        localStorage.setItem('localTodo', JSON.stringify(this.localTodo));
+        this.todoInput.value = '';
+        this.getEverything();
+    }
+    completeTodo(todo:Todo) {
+        todo.complete = true;
+        localStorage.setItem('localTodo', JSON.stringify(this.localTodo));
+        this.getEverything();
+    }
+    editTodo(todo:Todo):void {
+        const newText = prompt('Enter new text:', todo.text);
+        if (newText) {
+            todo.text = newText;
+            localStorage.setItem('localTodo', JSON.stringify(this.localTodo));
+            this.getEverything();
+        }
+    }
+    removeTodo(todo:Todo):void {
+        this.localTodo = this.localTodo.filter((rem:Todo) => rem.id != todo.id);
+        localStorage.setItem('localTodo', JSON.stringify(this.localTodo));
+        this.getEverything();
+    }
+    getEverything():void {
+        this.todoList.innerHTML = '';
+        this.localTodo.sort((a, b) => Number(a.complete)- Number(b.complete));
+        this.localTodo.forEach(todo => {
+            const single = document.createElement('li');
+            if (todo.complete) single.style.backgroundColor = 'lightgreen';
+            single.innerHTML = `${todo.text}
+                                ${!todo.complete ? '<button class="complete">Completed</button>' : ''}
+                                ${!todo.complete ? '<button class="edit">Edit</button>' : ''}
+                                <button class="remove">Remove</button>`;
+
+            const completeButton = single.querySelector('.complete') as HTMLButtonElement;
+            const editButton = single.querySelector('.edit') as HTMLButtonElement;
+            const removeButton = single.querySelector('.remove') as HTMLButtonElement;
+
+            if (completeButton) {
+                completeButton.addEventListener('click', () => this.completeTodo(todo));
+            }
+
+            if (editButton) {
+                editButton.addEventListener('click', () => this.editTodo(todo));
+            }
+            removeButton.addEventListener('click', () => this.removeTodo(todo));
+            this.todoList.appendChild(single);
+        });
+    }
+}
+let todos = new TodoApp();
