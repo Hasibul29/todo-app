@@ -28,3 +28,6 @@ In this version 'edit' button also disappear when todo is completed. Issue with 
 
 # version 0.9
 Final version!!!
+
+# version 1.0
+Added CURD Method
