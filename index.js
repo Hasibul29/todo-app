@@ -67,9 +67,11 @@ const getEverything = () => {
             });
         }
         const removeButton = single.querySelector('.remove');
-        removeButton.addEventListener('click', () => {
-            removeTodo(localTodo, todo);
-        });
+        if(removeButton) {
+              removeButton.addEventListener('click', () => {
+                  removeTodo(localTodo, todo);
+              });
+        }
         todoList.appendChild(single);
     });
 }
